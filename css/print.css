@@ -1,0 +1,35 @@
+@media print {
+ #ex1, #input,.input , .fontlist, .transparent-box{
+     display: none;
+ }
+    pre {
+        overflow: hidden;
+        border:0px;
+    }
+}
+
+.transparent {
+    color: lightgray !important;
+}
+
+
+@media screen {
+    .preview-background {
+        background: url("data:image/svg+xml;utf8,<svg width='5mm' height='5mm' viewPort='0 0 1mm 1mm' xmlns='http://www.w3.org/2000/svg'><circle cx='4mm' cy='4mm' r='0.3mm' fill='red'/></svg>");
+        line-height: 5mm;
+        position: relative;
+        background-position:0px -7px;
+    }
+
+    pre {
+        background: transparent;
+        text-decoration-color: lightgray;
+        line-height: 0.5mm;
+        vertical-align:bottom;
+        overflow: hidden;
+        padding: 10px;
+
+
+    }
+
+}
