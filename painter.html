@@ -1,0 +1,87 @@
+<html>
+<meta charset="UTF-8"/>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="css/print.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Aguafina+Script|Aladin|Alex+Brush|Allura|Amatic+SC|Amita|Annie+Use+Your+Telescope|Architects+Daughter|Arizonia|Bad+Script|Berkshire+Swash|Bilbo|Bilbo+Swash+Caps|Bonbon|Butterfly+Kids|Calligraffitti|Caveat|Caveat+Brush|Cedarville+Cursive|Clicker+Script|Coming+Soon|Condiment|Cookie|Courgette|Covered+By+Your+Grace|Crafty+Girls|Damion|Dancing+Script|Dawning+of+a+New+Day|Dekko|Delius|Delius+Swash+Caps|Delius+Unicase|Devonshire|Dr+Sugiyama|Eagle+Lake|Engagement|Euphoria+Script|Felipa|Fondamento|Give+You+Glory|Gloria+Hallelujah|Gochi+Hand|Grand+Hotel|Great+Vibes|Handlee|Herr+Von+Muellerhoff|Homemade+Apple|Indie+Flower|Italianno|Itim|Jim+Nightshade|Julee|Just+Another+Hand|Just+Me+Again+Down+Here|Kalam|Kaushan+Script|Kavivanar|Kristi|La+Belle+Aurore|Lakki+Reddy|Lateef|League+Script|Leckerli+One|Loved+by+the+King|Lovers+Quarrel|Marck+Script|Meddon|Merienda|Merienda+One|Miss+Fajardose|Molle:400i|Monsieur+La+Doulaise|Montez|Mr+Bedfort|Mr+Dafoe|Mr+De+Haviland|Mrs+Saint+Delafield|Mrs+Sheppards|Neucha|Niconne|Norican|Nothing+You+Could+Do|Over+the+Rainbow|Pacifico|Pangolin|Parisienne|Patrick+Hand|Patrick+Hand+SC|Permanent+Marker|Petit+Formal+Script|Pinyon+Script|Quintessential|Qwigley|Rancho|Redressed|Reenie+Beanie|Rochester|Rock+Salt|Romanesco|Rouge+Script|Ruge+Boogie|Sacramento|Satisfy|Schoolbell|Sedgwick+Ave|Sedgwick+Ave+Display|Shadows+Into+Light|Shadows+Into+Light+Two|Short+Stack|Sofia|Sriracha|Stalemate|Sue+Ellen+Francisco|Sunshiney|Swanky+and+Moo+Moo|Tangerine|The+Girl+Next+Door|Tillana|Vibur|Waiting+for+the+Sunrise|Walter+Turncoat|Yellowtail|Yesteryear|Zeyada"
+        rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css" />
+</head>
+<body>
+
+
+
+    <div class="row ">
+      <div class="col-md-4">
+        <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="5" data-slider-max="30" data-slider-step="1" /><br/>
+          <div class="transparent-box">
+          <label for="exersise">Transparent</label>
+          <input type="checkbox" aria-label="asdfds" id="exersise"/>
+          <br/>
+            <label for="exersise">Raster</label>
+          <input type="text" value="5" id="raster" style="width: 3em"/>mm
+          <p>
+            Das raster ist standard auf 5 mm eingestellt:
+          </p>
+            <button class="btn" id="print">
+              print
+            </button>
+          </div>
+
+      </div>
+
+
+            <button class="btn" id="print">
+              print
+            </button>
+  <div class="print">
+
+  </div>
+
+  </body>
+<script type="text/javascript">
+  $(document).ready(function () {
+
+
+    $('#print').click(function(){
+
+      var cx = 5;
+      var cy = 5;
+
+      var template = '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 100%; height: 100%; overflow: hidden;" id="printSvg">';
+
+      for (var i = 0; i < 60; i++) {
+
+        for (var k = 0; k < 50; k++) {
+          cx = cx+5;
+          template+= '<circle cx="'+cx+'mm" cy="'+cy+'mm" r="0.3mm" fill="#767676"></circle>';
+          //;
+        }
+        cy = cy+5;
+        cx=5;
+      }
+
+      template += '</svg>';
+      $('.print').append(template);
+
+      //window.print();
+    })
+  });
+
+</script>
+</html>

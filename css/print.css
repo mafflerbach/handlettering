@@ -1,35 +1,270 @@
 @media print {
- #ex1, #input,.input , .fontlist, .transparent-box{
+
+ #ex1, #input,.input , .fontlist, .transparent-box, .elements-btn, .marker, .tools{
      display: none;
  }
+body{
+    margin: 0;
+}
     pre {
         overflow: hidden;
         border:0px;
     }
+    .transparent {
+        color: #efefef;
+    }
+
+
+    .print {
+        width: 100%;
+        height:100%;
+    }
+
+    canvas {
+        border:none;
+    }
+
 }
 
-.transparent {
-    color: lightgray !important;
+.canvas-box {
+    position: relative;
 }
 
 
+pre {
+    background: transparent;
+    text-decoration-color: lightgray;
+    line-height: 0.5mm;
+    vertical-align:bottom;
+    overflow: hidden;
+    padding: 5mm;
+}
+
+.canvas-box{
+ float:left;
+}
 @media screen {
-    .preview-background {
-        background: url("data:image/svg+xml;utf8,<svg width='5mm' height='5mm' viewPort='0 0 1mm 1mm' xmlns='http://www.w3.org/2000/svg'><circle cx='4mm' cy='4mm' r='0.3mm' fill='red'/></svg>");
-        line-height: 5mm;
-        position: relative;
-        background-position:0px -7px;
+    .transparent {
+        color: rgba(0, 0, 0, 0.2);
     }
 
-    pre {
-        background: transparent;
-        text-decoration-color: lightgray;
-        line-height: 0.5mm;
-        vertical-align:bottom;
-        overflow: hidden;
-        padding: 10px;
+    .print {
 
 
     }
+    canvas {
 
+    }
+
+    .marker {
+        display: block;
+        width: 2px;
+        background-color:black;
+        height: 6px;
+        position: absolute;
+    }
+}
+
+
+.week {
+    width:4.5cm;
+    height: 8cm;
+    border:1px solid lightgray  ;
+    position: absolute;
+    z-index: 2;
+}
+
+.monday {
+    top:20mm;
+    left:5mm;
+}
+.tuesday {
+    top:20mm;
+    left:5cm;
+    border-left: none;
+}
+.wednesday {
+    top:20mm;
+    left:9.5cm;
+    border-left: none;
+}
+.thursday {
+    top:11.5cm;
+    left:5mm;
+}
+.friday {
+    top:11.5cm;
+    left:5cm;
+    border-left: none;
+}
+.saturday {
+    top:11.5cm;
+    left:9.5cm;
+
+    border-left: none;
+}
+.sunday {
+    top:20mm;
+    left:5mm;
+}
+
+.calendar {
+    position: absolute;
+    top: 11.5cm;
+    left: 5mm;
+    font-family: monospace;
+    z-index: 2;
+    background-color: #fff;
+}
+
+.calendar td {
+ width: 5mm;
+}
+.calendar tr {
+
+}
+
+.day {
+    font-family: 'Pacifico', cursive;
+    position: absolute;
+    top:0px;
+    left:0;
+    font-size: 1.8em;
+    padding-left: 1mm;
+    width: 100%;
+    background-color: #fff;
+    border-bottom:1px solid lightgray;
+    height: 10mm;
+}
+.date {
+    font-family: 'Pacifico', cursive;
+    position: absolute;
+    top:0px;
+    right:0;
+    font-size: 1.8em;
+    padding-right: 1mm;
+    background-color: #fff;
+}
+
+.meal{
+    border-top:1px solid lightgray;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    height: 1cm;
+    width: 4.5cm;
+}
+
+.crow {
+
+}
+
+.monthlyRight span, .monthlyLeft span{
+    display: inline-block;
+    width: 3cm;
+    height: 3cm;
+    border:1px solid lightgray;
+
+
+}
+
+span.weekday {
+    width: 3cm;
+    height: auto;
+
+}
+.monthlyLeft {
+    position: absolute;
+    left: 5mm;
+    top:1cm;
+}
+
+.monthlyRight {
+    position: absolute;
+    width: 9cm;
+    left: 5mm;
+    top:1cm;
+}
+
+.monthlyLeft span, .monthlyRight span {
+    float: left;
+    font-family: 'Pacifico', cursive;
+    font-size: 1em;
+    padding-left: 0.1em;
+}
+
+.monthlyRight span.empty, .monthlyLeft span.empty{
+    border:none;
+}
+
+.weekday {
+    font-family: 'Pacifico', cursive;
+}
+
+.monthlyHead{
+    position: absolute;
+    right: -4cm;
+    font-family: 'Pacifico', cursive;
+    transform: rotate(90deg);
+    top: 8cm;
+    font-size: 6em;
+    z-index: 2;
+
+}
+
+.pageA5 {
+
+    width: 148mm;
+    height: 21.0cm;
+    overflow: hidden;
+    position: relative;
+    float:left;
+    border: 1px solid;
+}
+
+.weeklyHead {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    top: 5mm;
+    position: absolute;
+    left: 5mm;
+    z-index: 1;
+}
+
+.kalender tr td {
+    text-align: center;
+    font-size: 1.2em;
+    border:1px solid lightgray;
+}
+
+.row0 td {
+
+}
+.row1 td {
+
+}
+.row2 td {
+
+}
+.row3 td {
+
+}
+.row4 td {
+
+}
+.row5 td {
+
+}
+
+.count {
+    position: absolute;
+    bottom: 1em;
+    font-family: 'Pacifico', cursive;
+}
+.even .count {
+    left:1em;
+}
+
+.odd .count {
+    right:1em;
 }

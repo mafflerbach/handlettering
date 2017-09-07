@@ -1,0 +1,361 @@
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+  <link rel="stylesheet" href="css/print.css"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Aguafina+Script|Aladin|Alex+Brush|Allura|Amatic+SC|Amita|Annie+Use+Your+Telescope|Architects+Daughter|Arizonia|Bad+Script|Berkshire+Swash|Bilbo|Bilbo+Swash+Caps|Bonbon|Butterfly+Kids|Calligraffitti|Caveat|Caveat+Brush|Cedarville+Cursive|Clicker+Script|Coming+Soon|Condiment|Cookie|Courgette|Covered+By+Your+Grace|Crafty+Girls|Damion|Dancing+Script|Dawning+of+a+New+Day|Dekko|Delius|Delius+Swash+Caps|Delius+Unicase|Devonshire|Dr+Sugiyama|Eagle+Lake|Engagement|Euphoria+Script|Felipa|Fondamento|Give+You+Glory|Gloria+Hallelujah|Gochi+Hand|Grand+Hotel|Great+Vibes|Handlee|Herr+Von+Muellerhoff|Homemade+Apple|Indie+Flower|Italianno|Itim|Jim+Nightshade|Julee|Just+Another+Hand|Just+Me+Again+Down+Here|Kalam|Kaushan+Script|Kavivanar|Kristi|La+Belle+Aurore|Lakki+Reddy|Lateef|League+Script|Leckerli+One|Loved+by+the+King|Lovers+Quarrel|Marck+Script|Meddon|Merienda|Merienda+One|Miss+Fajardose|Molle:400i|Monsieur+La+Doulaise|Montez|Mr+Bedfort|Mr+Dafoe|Mr+De+Haviland|Mrs+Saint+Delafield|Mrs+Sheppards|Neucha|Niconne|Norican|Nothing+You+Could+Do|Over+the+Rainbow|Pacifico|Pangolin|Parisienne|Patrick+Hand|Patrick+Hand+SC|Permanent+Marker|Petit+Formal+Script|Pinyon+Script|Quintessential|Qwigley|Rancho|Redressed|Reenie+Beanie|Rochester|Rock+Salt|Romanesco|Rouge+Script|Ruge+Boogie|Sacramento|Satisfy|Schoolbell|Sedgwick+Ave|Sedgwick+Ave+Display|Shadows+Into+Light|Shadows+Into+Light+Two|Short+Stack|Sofia|Sriracha|Stalemate|Sue+Ellen+Francisco|Sunshiney|Swanky+and+Moo+Moo|Tangerine|The+Girl+Next+Door|Tillana|Vibur|Waiting+for+the+Sunrise|Walter+Turncoat|Yellowtail|Yesteryear|Zeyada"
+        rel="stylesheet"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>
+  <!--  <script src="js/fabric.min.js"></script>
+    --><link rel="stylesheet"
+           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css"/>
+</head>
+<body>
+<div class="pageA5 index"></div>
+<div class="monthlySpread pageA5"></div>
+
+</body>
+
+<script>
+
+  $(document).ready(function () {
+    //$('body').append(printWeek());
+
+    var d = new Date();
+    var dm = d.getMonth() + 3;
+    var dj = d.getYear() + 1900;
+
+
+    Monthly(9, 2017);
+    Weekly(9, 2017);
+    Kalender(9, 2017);
+
+    Monthly(10, 2017);
+    Weekly(10, 2017);
+    Kalender(10, 2017);
+
+    updateGrid(5);
+    nummerate();
+
+    index()
+
+
+//    $('body').append('<div class="monthlySpread pageA5"></div>');
+
+  })
+
+
+  function nummerate() {
+
+    jQuery.each($('.page'), function (i, val) {
+      var index = i + 1;
+      $(this).append('<span class="count">'+index+'</span>');
+    })
+
+  }
+
+  function index() {
+
+  }
+
+  function updateGrid(size) {
+
+    var cx = 0;
+    var cy = 0;
+
+    var template = '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 100%; height: 100%; overflow: hidden;" id="printSvg">';
+
+    for (var i = 0; i < 43; i++) {
+
+      for (var k = 0; k < 30; k++) {
+        cx = cx + size;
+        template += '<circle cx="' + cx + 'mm" cy="' + cy + 'mm" r="0.3mm" fill="#ccc"></circle>';
+      }
+      cy = cy + size;
+      cx = 0;
+    }
+
+    template += '</svg>';
+    $('.print, .monthlySpread').append(template);
+
+  }
+
+  // insbesondere könnte auch ein Monat gewählt werden, in dem das aktuelle Datum nicht vorkommt
+
+
+  function getStartDay(Jahr, Monat) {
+    var Zeit = new Date(Jahr, Monat - 1, 1);
+
+    var Start = Zeit.getDay();
+
+    if (Start > 0) {
+      Start--;
+    } else {
+      Start = 6;
+    }
+    return Start
+  }
+  function getEndDay(Jahr, Monat) {
+
+    var Stop = 31;
+    if (Monat == 4 || Monat == 6 || Monat == 9 || Monat == 11) --Stop;
+
+
+    if (Monat == 2) {
+      Stop = Stop - 3;
+      if (Jahr % 4 == 0) Stop++;
+      if (Jahr % 100 == 0) Stop--;
+      if (Jahr % 400 == 0) Stop++;
+    }
+
+    return Stop;
+  }
+
+
+  function Monthly(Monat, Jahr) {
+
+    monthName = new Array("jan", "feb", "mar", "apr", "mai", "jun",
+            "jul", "aug", "sep", "oct", "nov", "dec");
+
+    var monthClass = monthName[Monat - 1];
+
+    $('body').append('<div class="monthlySpread pageA5 page even ' + monthClass + '"><div class="monthlyLeft"></div></div>');
+    $('body').append('<div class="monthlySpread pageA5 page odd ' + monthClass + '"><div class="monthlyRight"></div><div class="monthlyHead"></div></div>');
+
+
+    Monatsname = new Array("Januar", "Februar", "März", "April", "Mai", "Juni",
+            "Juli", "August", "September", "Oktober", "November", "Dezember");
+    Tag = new Array("Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
+
+    var Monatskopf = Monatsname[Monat - 1] + " " + Jahr;
+    $("." + monthClass + ' .monthlyHead').append(Monatskopf);
+    calendarTemplate("." + monthClass);
+
+
+    var counter = 1;
+    var Tageszahl = 1;
+
+    var Stop = getEndDay(Jahr, Monat);
+    var Start = getStartDay(Jahr, Monat);
+
+    for (var i = 0; i <= 5; i++) {
+      for (var j = 0; j <= 6; j++) {
+        if (((i == 0) && (j <= 5) && (j < Start)) || (Tageszahl > Stop)) {
+          $("." + monthClass + " .sp_" + counter).append(' ').addClass('empty');
+        } else {
+          $("." + monthClass + " .sp_" + counter).append(Tageszahl);
+          Tageszahl++;
+        }
+        counter++;
+      }
+    }
+
+
+  }
+
+
+  function Kalender(Monat, Jahr) {
+    monthName = new Array("jan", "feb", "mar", "apr", "mai", "jun",
+            "jul", "aug", "sep", "oct", "nov", "dec");
+    var monthClass = monthName[Monat - 1];
+
+    Monatsname = new Array("Januar", "Februar", "März", "April", "Mai", "Juni",
+            "Juli", "August", "September", "Oktober", "November", "Dezember");
+    Tag = new Array("M", "D", "M", "D", "F", "S", "S");
+
+
+    var Stop = getEndDay(Jahr, Monat);
+    var Start = getStartDay(Jahr, Monat);
+
+    jQuery.each($("." + monthClass + ' .kalender'), function (i, val) {
+
+      var tabelle = this;
+
+      var row = tabelle.insertRow(0);
+      for (var i = 0; i <= 6; i++) {
+        var cell = row.insertCell(i);
+        cell.innerHTML = Tag[i];
+      }
+
+      // ermittle Tag und schreibe Zeile
+      var Tageszahl = 1;
+
+      for (var i = 0; i <= 5; i++) {
+
+        var wekknumber = weeknumber(new Date(Jahr, Monat - 1, Tageszahl))
+
+        var row = tabelle.insertRow(1 + i);
+        row.className = 'row' + i;
+        for (var j = 0; j <= 6; j++) {
+          if (((i == 0) && (j <= 5) && (j < Start)) || (Tageszahl > Stop)) {
+            var cell = row.insertCell(j);
+            cell.innerHTML = ' ';
+            if (j == 6) {
+
+              var cell2 = row.insertCell(7);
+              cell2.innerHTML = wekknumber;
+              cell2.className = 'weeknumber';
+            }
+          } else {
+            var cell = row.insertCell(j);
+            cell.innerHTML = Tageszahl;
+            cell.className = 'kalendertag'
+            if (j == 6) {
+              var cell2 = row.insertCell(7);
+              cell2.innerHTML = wekknumber;
+              cell2.className = 'weeknumber';
+            }
+            Tageszahl++;
+          }
+        }
+      }
+
+
+    });
+
+  }
+  /*
+   var date = new Date(2015, 11, 24);
+   alert(weeknumber(date))
+   */
+  function weeknumber(date) {
+    Datum = date; // Anm. 1
+    var monday = getMonday(date);
+    var kwjahr = monday.getFullYear();
+    var MoKW1 = getMonday(new Date(kwjahr, 0, 0)); // Anm. 2
+    kw = Math.floor(1.5 + (monday.getTime() - MoKW1.getTime()) / 86400000 / 7) // Anm. 3, 4
+
+    function getMonday(datum) { // Anm. 5
+      var monday = new Date();
+      monday.setTime(datum.getTime() + (0 - ((datum.getDay() + 6) % 7)) * 86400000); // Anm. 3
+      return monday;
+    }
+
+    return kw - 1;
+  }
+
+
+  function Weekly(Monat, Jahr) {
+    monthName = new Array("jan", "feb", "mar", "apr", "mai", "jun",
+            "jul", "aug", "sep", "oct", "nov", "dec");
+    var monthClass = monthName[Monat - 1];
+
+
+    Monatsname = new Array("Januar", "Februar", "März", "April", "Mai", "Juni",
+            "Juli", "August", "September", "Oktober", "November", "Dezember");
+    Tag = new Array("M", "D", "M", "D", "F", "S", "S");
+
+
+    var Stop = getEndDay(Jahr, Monat);
+    var Start = getStartDay(Jahr, Monat);
+    var content = '';
+
+    for (var i = 0; i <= 6; i++) {
+      // var cell = row.insertCell(i);
+      //cell.innerHTML = Tag[i];
+    }
+
+
+    var Tageszahl = 1;
+
+    for (var i = 0; i <= 5; i++) {
+
+      var wekknumber = weeknumber(new Date(Jahr, Monat - 1, Tageszahl))
+
+      content += '<div class="print pageA5 even page" ><div class="weeklyHead">Woche ' + wekknumber + '</div>';
+
+      //  var row = tabelle.insertRow(1 + i);
+      for (var j = 0; j <= 6; j++) {
+        switch (j) {
+          case 0:
+            dayname = "Montag";
+            daycss = "monday";
+            break;
+          case 1:
+            dayname = "Dienstag";
+            daycss = "tuesday";
+            break;
+          case 2:
+            dayname = "Mittwoch";
+            daycss = "wednesday";
+            break;
+          case 3:
+            dayname = "Donnerstag";
+            daycss = "thursday";
+            break;
+          case 4:
+            dayname = "Freitag";
+            daycss = "friday";
+            break;
+          case 5:
+            dayname = "Samstag";
+            daycss = "saturday";
+            break;
+          case 6:
+            dayname = "Sonntag";
+            daycss = "sunday";
+            break;
+        }
+
+        if (j == 6) {
+          content += '</div><div class="print pageA5 odd page">';
+          content += '<div class="calendar ' + monthClass + '"> <table class="kalender"></table> </div>';
+        }
+
+        if (((i == 0) && (j <= 5) && (j < Start)) || (Tageszahl > Stop)) {
+          content += '<div class="week ' + daycss + '"><span class="meal"></span><span class="day">' + dayname + '</span><span class="date"></span></div>';
+        } else {
+          content += '<div class="week ' + daycss + ' "><span class="meal"></span><span class="day">' + dayname + '</span><span class="date">' + Tageszahl + '</span></div>';
+          Tageszahl++;
+        }
+
+      }
+      content += '</div>';
+    }
+    $('body').append(content);
+
+
+  }
+
+  function calendarTemplate(parent) {
+
+    var left = '<span class="sp_1"></span><span class="sp_2"></span><span class="sp_3"></span><span class="sp_4"></span>' +
+            '<span class="sp_8"></span><span class="sp_9"></span><span class="sp_10"></span><span class="sp_11"></span>' +
+            '<span class="sp_15"></span><span class="sp_16"></span><span class="sp_17"></span><span class="sp_18"></span>' +
+            '<span class="sp_22"></span><span class="sp_23"></span><span class="sp_24"></span><span class="sp_25"></span>' +
+            '<span class="sp_29"></span><span class="sp_30"></span><span class="sp_31"></span><span class="sp_32"></span>' +
+            '<span class="sp_36"></span><span class="sp_37"></span><span class="sp_38"></span><span class="sp_39"></span>';
+
+
+    var right = '<span class="sp_5"></span><span class="sp_6"></span><span class="sp_7"></span>' +
+            '<span class="sp_12"></span><span class="sp_13"></span><span class="sp_14"></span>' +
+            '<span class="sp_19"></span><span class="sp_20"></span><span class="sp_21"></span>' +
+            '<span class="sp_26"></span><span class="sp_27"></span><span class="sp_28"></span>' +
+            '<span class="sp_33"></span><span class="sp_34"></span><span class="sp_35"></span>' +
+            '<span class="sp_40"></span><span class="sp_41"></span><span class="sp_42"></span>';
+
+
+    $(parent + ' .monthlyLeft').append(left);
+    $(parent + ' .monthlyRight').append(right);
+
+
+  }
+
+
+
+
+</script>
+</html>
