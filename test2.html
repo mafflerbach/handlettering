@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
       integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 
-  <link rel="stylesheet" href="css/print.css"/>
+  <link rel="stylesheet" href="css/print2.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
@@ -42,13 +42,6 @@
     Monthly(10, 2017);
     Weekly(10, 2017);
     Kalender(10, 2017);
-
-
-    Monthly(11, 2017);
-    Weekly(11, 2017);
-    Kalender(11, 2017);
-
-
 
     updateGrid(5);
     nummerate();
@@ -266,11 +259,6 @@
     var Start = getStartDay(Jahr, Monat);
     var content = '';
 
-    for (var i = 0; i <= 6; i++) {
-      // var cell = row.insertCell(i);
-      //cell.innerHTML = Tag[i];
-    }
-
 
     var Tageszahl = 1;
 
@@ -319,9 +307,35 @@
         }
 
         if (((i == 0) && (j <= 5) && (j < Start)) || (Tageszahl > Stop)) {
-          content += '<div class="week ' + daycss + '"><span class="meal"></span><span class="day">' + dayname + '</span><span class="date"></span></div>';
+          content += '<div class="week ' + daycss + '"><span class="meal">' +
+                  '<span class="nb8">8</span>' +
+                  '<span class="nb9">9</span>' +
+                  '<span class="nb10">10</span>' +
+                  '<span class="nb11">11</span>' +
+                  '<span class="nb12">12</span>' +
+                  '<span class="nb13">13</span>' +
+                  '<span class="nb14">14</span>' +
+                  '<span class="nb15">15</span>' +
+                  '<span class="nb16">16</span>' +
+                  '<span class="nb17">17</span>' +
+                  '<span class="nb18">18</span>' +
+                  '<span class="nb19">19</span>' +
+                  '</span><span class="day">' + dayname + '</span><span class="date"></span></div>';
         } else {
-          content += '<div class="week ' + daycss + ' "><span class="meal"></span><span class="day">' + dayname + '</span><span class="date">' + Tageszahl + '</span></div>';
+          content += '<div class="week ' + daycss + ' "><span class="meal">' +
+                  '<span class="nb8">8</span>' +
+                  '<span class="nb9">9</span>' +
+                  '<span class="nb10">10</span>' +
+                  '<span class="nb11">11</span>' +
+                  '<span class="nb12">12</span>' +
+                  '<span class="nb13">13</span>' +
+                  '<span class="nb14">14</span>' +
+                  '<span class="nb15">15</span>' +
+                  '<span class="nb16">16</span>' +
+                  '<span class="nb17">17</span>' +
+                  '<span class="nb18">18</span>' +
+                  '<span class="nb19">19</span>' +
+                  '</span><span class="day">' + dayname + '</span><span class="date">' + Tageszahl + '</span></div>';
           Tageszahl++;
         }
 
